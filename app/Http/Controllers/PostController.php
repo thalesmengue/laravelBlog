@@ -12,7 +12,7 @@ class PostController extends Controller
 
     public function __construct()
     {
-        $this->middleware("auth")->except("index", "show");
+        $this->middleware("auth")->except("show");
     }
 
     /**
@@ -21,7 +21,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view ("posts.dashboard");
+        $posts = Post::query()->where("user_id", auth()->user()->id)->get();
+
+        return view("posts.dashboard", compact("posts"));
     }
 
     /**
@@ -42,15 +44,17 @@ class PostController extends Controller
      */
     public function store(PostStoreRequest $request)
     {
-        dd($request);
+        $request->image->store('posts', 'public');
+
         Post::query()->create([
             "title" => $request->title,
             "description" => $request->description,
-            "image" => $request->image,
-            "category_id" => $request->category
+            "image" => $request->image->hashName(),
+            "category_id" => $request->categories,
+            "user_id" => auth()->user()->id
         ]);
 
-        return redirect()->route("dashboard");
+        return redirect()->route("posts.index");
     }
 
     /**

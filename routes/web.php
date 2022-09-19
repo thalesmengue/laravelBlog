@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\HomePageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,8 @@ use App\Http\Controllers\PostController;
 |
 */
 
-
 Route::resource("posts", PostController::class);
+Route::get("/", [HomePageController::class, "index"])->name("index");
 
 
-
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

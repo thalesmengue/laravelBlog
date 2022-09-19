@@ -4,6 +4,31 @@
             {{ __('LaraBlog') }}
         </h2>
     </x-slot>
-
-<x-post-card />
+    <div class="relative bg-gray-50 px-4 pt-16 pb-20 sm:px-6 lg:px-8 lg:pt-24 lg:pb-28">
+        <div class="absolute inset-0">
+            <div class="h-1/3 sm:h-2/3 flex float-right mr-12">
+                @auth
+                    <div>
+                        <button onclick="window.location='{{ route("posts.create") }}'" type="button" class="rounded-md
+                        border border-transparent bg-indigo-600 px-4 py-2 text-sm mt-4 font-medium text-white shadow-sm
+                        hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+                        >Add Post
+                        </button>
+                    </div>
+                @endauth
+            </div>
+        </div>
+        <div class="relative mx-auto max-w-7xl">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">posts</h2>
+                <p class="mx-auto mt-3 max-w-2xl text-xl text-gray-500 sm:mt-4">here you can find some laravel articles
+                    or tips</p>
+            </div>
+            <x-post-card :posts="$posts"/>
+            @if($posts->isEmpty())
+                <p class="text-center font-bold text-xl">you haven't post anything yet, you can create posts by clicking
+                    on the purple button in the upper left corner</p>
+            @endif
+        </div>
+    </div>
 </x-app-layout>
