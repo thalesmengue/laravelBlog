@@ -16,7 +16,10 @@ use App\Http\Controllers\HomePageController;
 */
 
 Route::resource("posts", PostController::class);
+
 Route::get("/", [HomePageController::class, "index"])->name("index");
+
+
 
 
 require __DIR__ . '/auth.php';

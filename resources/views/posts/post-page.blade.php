@@ -4,6 +4,5 @@
             {{ __('LaraBlog') }}
         </h2>
     </x-slot>
-
-<x-create-post-form :categories="$categories" />
+    <x-single-post :post="$post"/>
 </x-app-layout>

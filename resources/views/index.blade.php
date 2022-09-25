@@ -4,14 +4,16 @@
             {{ __('LaraBlog') }}
         </h2>
     </x-slot>
-    <div class="relative mx-auto max-w-7xl">
-        <div class="text-center">
-            <p>
-                here you can create your own posts, and share with your friends
-            </p>
-            <p>
-                still haven't made an account? sign up by the header button
-            </p>
+    @guest
+        <div class="relative mx-auto max-w-7xl">
+            <div class="text-center mt-12">
+                <p>
+                    here you can create your own posts, and share with your friends
+                </p>
+                <p class="mt-4">
+                    still haven't made an account? sign up by the header button
+                </p>
+            </div>
         </div>
-    </div>
+    @endguest
 </x-app-layout>

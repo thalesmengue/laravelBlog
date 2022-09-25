@@ -1,6 +1,6 @@
-<footer class="text-center bg-gray-800 text-white fixed bottom-0 left-0 w-screen h-24">
+<footer class="text-center bg-gray-800 text-white fixed bottom-0 left-0 w-screen h-18">
     <div class="container px-6 pt-6">
-        <div class="flex justify-center mb-6 ml-72">
+        <div class="flex justify-center ml-72">
 
             <a href="https://twitter.com/thalesmengue" type="button" target="_blank" class="rounded-full border-2
             border-white text-white leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none
@@ -88,7 +88,7 @@
             <a href="https://github.com/thalesmengue" type="button" target="_blank" class="rounded-full border-2
             border-white text-white leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none
             focus:ring-0 duration-150 ease-in-out w-9 h-9 m-1 transition ease-in-out delay-150 hover:-translate-y-2
-            hover:scale-110 duration-300 mr-2"
+            hover:scale-110 duration-300 mr-2 mb-2"
             >
                 <svg aria-hidden="true"
                      focusable="false"

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostStoreRequest extends FormRequest
+class PostUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class PostStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -26,7 +26,7 @@ class PostStoreRequest extends FormRequest
         return [
             "title" => "required|string|min:5|max:60",
             "description" => "required|string|min:10|max:6000",
-            "image" => "required",
+            "image" => "image|mimes:jpeg,jpg,png,gif",
             "categories" => "required"
         ];
     }
@@ -44,7 +44,8 @@ class PostStoreRequest extends FormRequest
             "description.min" => "The description field must have at least 10 characters",
             "description.max" => "The description field must have less than 6000 characters",
 
-            "image.required" => "The image field is required",
+            "image.image" => "The file must be an image",
+            "image.mime" => "The image format must be a jpeg,jpg,png, or gif",
 
             "categories.required" => "You must choose one type of categories"
         ];

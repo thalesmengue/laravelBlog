@@ -5,5 +5,5 @@
         </h2>
     </x-slot>
 
-<x-create-post-form :categories="$categories" />
+    <x-edit-post-form :categories="$categories" :post="$post"/>
 </x-app-layout>

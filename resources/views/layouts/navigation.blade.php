@@ -7,25 +7,28 @@
                 </div>
                 <div class="hidden sm:ml-6 sm:block">
                     <div class="flex space-x-4">
-                        <a href="{{route("posts.index")}}"
-                           class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
-                           aria-current="page">Home</a>
+                        <a href="{{route("index")}}"
+                           class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                        >Home</a>
+                        @auth
+                            <a href="{{route("posts.index")}}"
+                               class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                            >Posts</a>
+                        @endauth
                         <a href="#"
                            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About
-                            me</a>
+                        </a>
                     </div>
                 </div>
             </div>
             @guest
                 <div class="mr-8">
-                    <a href="{{route("login")}}">
-                        <button class="bg-gray-200 text-slate-800 font-bold py-2 px-4 border-b-4
-                        border-gray-400 hover:opacity-60 rounded mr-4">
-                            sign in
-                        </button>
-                    </a>
-                    <button class="bg-gray-200 text-slate-800 font-bold py-2 px-4 border-b-4
-                    border-gray-400 hover:opacity-60 rounded">
+                    <button onclick="window.location='{{route("login")}}'" class="bg-gray-200 text-slate-800 font-bold
+                         py-2 px-4 border-b-4 border-gray-400 hover:opacity-60 rounded mr-4">
+                        sign in
+                    </button>
+                    <button onclick="window.location='{{route("register")}}'" class="bg-gray-200 text-slate-800 font-bold
+                     py-2 px-4 border-b-4 border-gray-400 hover:opacity-60 rounded">
                         sign up
                     </button>
                 </div>
@@ -38,7 +41,7 @@
                                 class="flex flex-wrap w-full px-12 py-2 mt-2 text-sm font-mono space-x-3 items-center bg-gray-800
                         rounded-lg hover:text-gray-900 focus:text-gray-900 hover:opacity-70 focus:outline-none focus:shadow-outline">
                             <img src="{{asset(auth()->user()->profile_image)}}" class="w-8 rounded-full">
-                            <span class="text-white"> {{auth()->user()->name}} </span>
+                            <span class="text-white"> {{auth()->user()->first_name}} </span>
                             <svg fill="currentColor" viewBox="0 0 20 20"
                                  :class="{'rotate-180': open, 'rotate-0': !open}"
                                  class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1 fill-white">
@@ -55,16 +58,15 @@
                              x-transition:leave-end="transform opacity-0 scale-95"
                              class="absolute right-0 w-full mt-1 origin-top-right rounded-md shadow-lg md:w-48">
                             <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
-                                <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0
+                                <button class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0
                         hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none
-                        focus:shadow-outline"
-                                   href="#"> Profile </a>
+                        focus:shadow-outline"> Profile
+                                </button>
                                 <form method="post" action="{{route("logout")}}">
                                     @csrf
                                     <button class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0
                         hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none
-                        focus:shadow-outline h-full"
-                                    > Logout
+                        focus:shadow-outline h-full"> Logout
                                     </button>
                                 </form>
                             </div>
@@ -75,13 +77,11 @@
             <div class="sm:hidden" id="mobile-menu">
                 <div class="space-y-1 px-2 pt-2 pb-3">
                     <a href="#" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
-                       aria-current="page">Dashboard</a>
+                       aria-current="page">Home</a>
                     <a href="#"
-                       class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Team</a>
+                       class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Posts</a>
                     <a href="#"
-                       class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
-                    <a href="#"
-                       class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Calendar</a>
+                       class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
                 </div>
             </div>
 </nav>
