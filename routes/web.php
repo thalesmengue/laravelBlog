@@ -8,7 +8,7 @@ use App\Http\Controllers\ProfileController;
 
 Route::resource("posts", PostController::class);
 
-Route::get("/", [HomePageController::class, "index"])->name("index");
+Route::get("/", HomePageController::class)->name("index");
 Route::get("/user/{username}", ProfileController::class)->name("user.profile");
 
 
