@@ -1,26 +1,26 @@
 <x-guest-layout>
-    <x-auth-card>
+    <x-auth.auth-card>
 
         <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+        <x-auth.auth-session-status class="mb-4" :status="session('status')" />
 
         <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+        <x-auth.auth-validation-errors class="mb-4" :errors="$errors" />
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
             <div>
-                <x-input-label class="text-black" for="email" :value="__('Email')" />
+                <x-auth.input-label class="text-black" for="email" :value="__('Email')" />
 
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
+                <x-auth.text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
                               required autofocus />
             </div>
 
             <div class="mt-4">
-                <x-input-label for="password" :value="__('Password')" />
+                <x-auth.input-label for="password" :value="__('Password')" />
 
-                <x-text-input id="password" class="block mt-1 w-full"
+                <x-auth.text-input id="password" class="block mt-1 w-full"
                                 type="password"
                                 name="password"
                                 required autocomplete="current-password" />
@@ -41,10 +41,10 @@
                     </a>
                 @endif
 
-                <x-primary-button class="ml-3">
+                <x-auth.primary-button class="ml-3">
                     {{ __('Login') }}
-                </x-primary-button>
+                </x-auth.primary-button>
             </div>
         </form>
-    </x-auth-card>
+    </x-auth.auth-card>
 </x-guest-layout>

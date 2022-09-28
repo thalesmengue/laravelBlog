@@ -24,7 +24,9 @@
                 <p class="mx-auto mt-3 max-w-2xl text-xl text-gray-500 sm:mt-4">here you can find some laravel articles
                     or tips</p>
             </div>
-            <x-post-card :posts="$posts"/>
+            <div class="mx-auto mt-12 grid max-w-lg gap-5 lg:max-w-none lg:grid-cols-3">
+                <x-post.post-card :posts="$posts"/>
+            </div>
             @if($posts->isEmpty())
                 <p class="text-center font-bold text-xl">you haven't post anything yet, you can create posts by clicking
                     on the purple button in the upper left corner</p>

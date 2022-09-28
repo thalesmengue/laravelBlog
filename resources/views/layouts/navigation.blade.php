@@ -14,6 +14,9 @@
                             <a href="{{route("posts.index")}}"
                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                             >Posts</a>
+                            <a href="{{route("user.profile", auth()->user()->username)}}"
+                               class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                            >Profile</a>
                         @endauth
                         <a href="#"
                            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About
@@ -60,7 +63,7 @@
                             <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
                                 <button class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0
                         hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none
-                        focus:shadow-outline"> Profile
+                        focus:shadow-outline"> Settings
                                 </button>
                                 <form method="post" action="{{route("logout")}}">
                                     @csrf

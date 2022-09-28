@@ -1,4 +1,4 @@
-<div class="mx-auto mt-12 grid max-w-lg gap-5 lg:max-w-none lg:grid-cols-3">
+
     @isset($posts)
         @foreach($posts as $post)
             <div class="flex flex-col overflow-hidden rounded-lg shadow-lg">
@@ -28,7 +28,7 @@
                         <div class="flex-shrink-0">
                             <a href="#">
                                 <img class="h-10 w-10 rounded-full"
-                                     src="{{$post->user->profile_image}}" alt="">
+                                     src="{{asset($post->user->profile_image)}}" alt="">
                             </a>
                         </div>
                         <div class="ml-3">
@@ -46,4 +46,3 @@
             </div>
         @endforeach
     @endisset
-</div>

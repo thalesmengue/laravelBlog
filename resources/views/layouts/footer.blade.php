@@ -1,4 +1,4 @@
-<footer class="text-center bg-gray-800 text-white fixed bottom-0 left-0 w-screen h-18">
+<footer class="text-center bg-gray-800 text-white relative bottom-0 left-0 max-w h-18 absolute">
     <div class="container px-6 pt-6">
         <div class="flex justify-center ml-72">
 

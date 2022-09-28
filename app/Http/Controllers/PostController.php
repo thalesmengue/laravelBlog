@@ -7,6 +7,7 @@ use App\Http\Requests\PostUpdateRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -119,6 +120,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if (File::exists(public_path('storage/posts/' . $post->image))) {
+            File::delete(public_path('storage/posts/' . $post->image));
+        }
         $post->delete();
         return redirect()->route("posts.index");
     }

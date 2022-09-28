@@ -1,60 +1,60 @@
 <x-guest-layout>
-    <x-auth-card>
+    <x-auth.auth-card>
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500"/>
+                <x-auth.application-logo class="w-20 h-20 fill-current text-gray-500"/>
             </a>
         </x-slot>
 
         <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors"/>
+        <x-auth.auth-validation-errors class="mb-4" :errors="$errors"/>
 
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+        <x-auth.auth-session-status class="mb-4" :status="session('status')" />
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
             <div>
-                <x-input-label for="first_name" :value="__('First Name')"/>
+                <x-auth.input-label for="first_name" :value="__('First Name')"/>
 
-                <x-text-input id="first_name" class="mt-1 w-full" type="text" name="first_name"
+                <x-auth.text-input id="first_name" class="mt-1 w-full" type="text" name="first_name"
                               :value="old('first_name')" required autofocus/>
             </div>
 
             <div class="mt-4">
-                <x-input-label for="last_name" :value="__('Last Name')"/>
+                <x-auth.input-label for="last_name" :value="__('Last Name')"/>
 
-                <x-text-input id="last_name" class="block mt-1 w-full" type="text" name="last_name"
+                <x-auth.text-input id="last_name" class="block mt-1 w-full" type="text" name="last_name"
                               :value="old('last_name')" required autofocus/>
             </div>
 
             <div class="mt-4">
-                <x-input-label for="username" :value="__('Username')"/>
+                <x-auth.input-label for="username" :value="__('Username')"/>
 
-                <x-text-input id="username" class="block mt-1 w-full" type="text" name="username"
+                <x-auth.text-input id="username" class="block mt-1 w-full" type="text" name="username"
                               :value="old('username')" required autofocus/>
             </div>
 
             <div class="mt-4">
-                <x-input-label for="email" :value="__('Email')"/>
+                <x-auth.input-label for="email" :value="__('Email')"/>
 
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
+                <x-auth.text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
                               required/>
             </div>
 
             <div class="mt-4">
-                <x-input-label for="password" :value="__('Password')"/>
+                <x-auth.input-label for="password" :value="__('Password')"/>
 
-                <x-text-input id="password" class="block mt-1 w-full"
+                <x-auth.text-input id="password" class="block mt-1 w-full"
                               type="password"
                               name="password"
                               required autocomplete="new-password"/>
             </div>
 
             <div class="mt-4">
-                <x-input-label for="password_confirmation" :value="__('Confirm Password')"/>
+                <x-auth.input-label for="password_confirmation" :value="__('Confirm Password')"/>
 
-                <x-text-input id="password_confirmation" class="block mt-1 w-full"
+                <x-auth.text-input id="password_confirmation" class="block mt-1 w-full"
                               type="password"
                               name="password_confirmation" required/>
             </div>
@@ -64,10 +64,10 @@
                     {{ __('Already registered?') }}
                 </a>
 
-                <x-primary-button class="ml-4">
+                <x-auth.primary-button class="ml-4">
                     {{ __('Register') }}
-                </x-primary-button>
+                </x-auth.primary-button>
             </div>
         </form>
-    </x-auth-card>
+    </x-auth.auth-card>
 </x-guest-layout>

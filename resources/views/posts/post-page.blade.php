@@ -4,5 +4,5 @@
             {{ __('LaraBlog') }}
         </h2>
     </x-slot>
-    <x-single-post :post="$post"/>
+    <x-post.single-post :post="$post"/>
 </x-app-layout>
