@@ -56,4 +56,12 @@ class User extends Authenticatable
         return $this->posts()->count();
     }
 
+    public function getImage()
+    {
+        if (empty($this->profile_image)) {
+            return "default.png";
+        } else {
+            return $this->profile_image;
+        }
+    }
 }

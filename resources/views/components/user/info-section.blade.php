@@ -7,7 +7,7 @@
                     </div>
                     <div class="px-4 text-center mt-20">
                         <div class="flex items-center justify-center ">
-                            <img alt="..." src="{{asset($user->profile_image)}}"
+                            <img alt="..." src="{{asset("storage/profile/$user->profile_image")}}"
                                  class=" shadow-xl rounded-full h-24 w-24 lg:-ml-16">
                         </div>
                         <div class="flex justify-center py-4 lg:pt-4 pt-8">

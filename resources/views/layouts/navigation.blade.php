@@ -1,4 +1,3 @@
-<!-- This example requires Tailwind CSS v2.0+ -->
 <nav class="bg-gray-800">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
@@ -14,7 +13,7 @@
                             <a href="{{route("posts.index")}}"
                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                             >Posts</a>
-                            <a href="{{route("user.profile", auth()->user()->username)}}"
+                            <a href="{{route("user.show", auth()->user()->username)}}"
                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                             >Profile</a>
                         @endauth
@@ -43,7 +42,7 @@
                         <button @click="open = !open"
                                 class="flex flex-wrap w-full px-12 py-2 mt-2 text-sm font-mono space-x-3 items-center bg-gray-800
                         rounded-lg hover:text-gray-900 focus:text-gray-900 hover:opacity-70 focus:outline-none focus:shadow-outline">
-                            <img src="{{asset(auth()->user()->profile_image)}}" class="w-8 rounded-full">
+                            <img src="{{asset("storage/profile/".auth()->user()->getImage())}}" class="w-8 rounded-full">
                             <span class="text-white"> {{auth()->user()->first_name}} </span>
                             <svg fill="currentColor" viewBox="0 0 20 20"
                                  :class="{'rotate-180': open, 'rotate-0': !open}"
@@ -61,9 +60,9 @@
                              x-transition:leave-end="transform opacity-0 scale-95"
                              class="absolute right-0 w-full mt-1 origin-top-right rounded-md shadow-lg md:w-48">
                             <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
-                                <button class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0
-                        hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none
-                        focus:shadow-outline"> Settings
+                                <button onclick="window.location='{{route("user.edit", auth()->user()->id)}}'" class="block px-4 py-2 mt-2 text-sm
+                                 font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-900 focus:text-gray-900
+                                  hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"> Settings
                                 </button>
                                 <form method="post" action="{{route("logout")}}">
                                     @csrf

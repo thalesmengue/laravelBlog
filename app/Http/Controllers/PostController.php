@@ -96,16 +96,14 @@ class PostController extends Controller
     {
         if ($request->hasFile("image")) {
             $upload = $request->image->move(public_path('storage/posts/'), $request->image->hashName());
-            if ($upload) {
-                $path = basename($upload);
-                unlink(public_path('storage/posts/' . $post->image));
-                $post->update([
-                    "title" => $request->title,
-                    "description" => $request->description,
-                    "image" => $path,
-                    "category_id" => $request->categories
-                ]);
-            }
+            $path = basename($upload);
+            File::delete(public_path('storage/posts/' . $post->image));
+            $post->update([
+                "title" => $request->title,
+                "description" => $request->description,
+                "image" => $path,
+                "category_id" => $request->categories
+            ]);
         } else {
             $post->update($request->all());
         }

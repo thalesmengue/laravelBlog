@@ -28,7 +28,7 @@
                         <div class="flex-shrink-0">
                             <a href="#">
                                 <img class="h-10 w-10 rounded-full"
-                                     src="{{asset($post->user->profile_image)}}" alt="">
+                                     src="{{asset("storage/profile/".$post->user->profile_image)}}" alt="">
                             </a>
                         </div>
                         <div class="ml-3">
