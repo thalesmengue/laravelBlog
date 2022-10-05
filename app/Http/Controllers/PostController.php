@@ -8,7 +8,6 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -92,10 +91,10 @@ class PostController extends Controller
      * @param \App\Models\Post $post
      *
      */
-    public function update(Request $request, Post $post)
+    public function update(PostUpdateRequest $request, Post $post)
     {
         if ($request->hasFile("image")) {
-            $upload = $request->image->move(public_path('storage/posts/'), $request->image->hashName());
+            $upload = $request->image->store("posts", "public");
             $path = basename($upload);
             File::delete(public_path('storage/posts/' . $post->image));
             $post->update([

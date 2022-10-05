@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -76,11 +77,10 @@ class UserController extends Controller
      * @param \App\Models\User $user
      *
      */
-    public function update(Request $request, User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
         if ($request->hasFile("profile_image")) {
-            $upload = $request->profile_image->move(public_path('storage/profile/'), $request->profile_image->hashName());
-            $path = basename($upload);
+            $request->profile_image->store("profile", "public");
             if (!empty($user->profile_image)) {
                 File::delete(public_path('storage/profile/' . $user->profile_image));
             }
@@ -90,7 +90,7 @@ class UserController extends Controller
                 "email" => $request->email,
                 "username" => $request->username,
                 "bio" => $request->bio,
-                "profile_image" => $path,
+                "profile_image" => $request->profile_image->hashName(),
             ]);
         } else {
             $user->update($request->all());

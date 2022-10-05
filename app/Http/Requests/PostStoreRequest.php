@@ -26,7 +26,7 @@ class PostStoreRequest extends FormRequest
         return [
             "title" => "required|string|min:5|max:60",
             "description" => "required|string|min:10|max:6000",
-            "image" => "required",
+            "image" => "required|image|mimes:jpeg,png,jpg,gif",
             "categories" => "required"
         ];
     }
@@ -45,6 +45,8 @@ class PostStoreRequest extends FormRequest
             "description.max" => "The description field must have less than 6000 characters",
 
             "image.required" => "The image field is required",
+            "image.image" => "The file need to be a image",
+            "image.mime" => "The type of files supported is jpeg,png,jpg or gif",
 
             "categories.required" => "You must choose one type of categories"
         ];
