@@ -45,7 +45,7 @@
                                     {{"We don't have much information about $user->username, but we are pretty sure
                                     that he's a cool person."}}
                                 @endif
-                                    {{$user->bio}}
+                                {{$user->bio}}
                             </p>
                         </div>
                     </div>

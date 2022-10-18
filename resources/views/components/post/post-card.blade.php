@@ -15,7 +15,7 @@
                     </p>
                     <a href="{{route("posts.show", $post)}}" class="mt-2 block">
                         <p class="text-xl font-semibold text-gray-900">{{$post->title}}</p>
-                        <p class="mt-3 text-base text-gray-500 text-justify">
+                        <p class="mt-3 text-base text-gray-500 text-justify break-words">
                             {{$post->halfString()}}
                             @if(strlen($post->description) >= 175)
                                 <a href="#" class="text-blue-600 flex flex-row hover:underline">see more...</a>

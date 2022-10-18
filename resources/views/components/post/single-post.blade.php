@@ -4,7 +4,8 @@
             <div class="h-2/3 sm:h-2/3 mr-8 mt-4 flex flex-row float-right">
                 <div>
                     <button onclick="window.location='{{ route("posts.edit", $post) }}'" type="button"
-                            class="text-white bg-blue-500 hover:bg-blue-600 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                            class="text-white bg-blue-500 hover:bg-blue-600 font-semibold py-2 px-4 border
+                            border-gray-400 rounded shadow"
                     >edit
                     </button>
                 </div>
@@ -13,7 +14,8 @@
                         @csrf
                         @method("DELETE")
                         <button type="submit"
-                                class="text-white bg-red-500 hover:bg-red-600 font-semibold py-2 px-4 border border-gray-400 rounded shadow ml-4">
+                                class="text-white bg-red-500 hover:bg-red-600 font-semibold py-2 px-4 border
+                                border-gray-400 rounded shadow ml-4">
                             delete
                         </button>
                     </form>
@@ -44,7 +46,7 @@
                     </div>
                 </div>
                 <div
-                    class="px-4 lg:px-0 mt-12 text-gray-700 max-w-screen-md mx-auto text-lg leading-relaxed mb-24 text-justify">
+                    class="px-4 lg:px-0 mt-12 text-gray-700 max-w-screen-md mx-auto text-lg leading-relaxed mb-24 text-justify break-words">
                     <p>{{$post->description}}</p>
                 </div>
             </main>
