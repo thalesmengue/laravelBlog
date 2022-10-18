@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostStoreRequest;
 use App\Http\Requests\PostUpdateRequest;
+use App\Models\Category;
 use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\View;
 
 class PostController extends Controller
 {
@@ -19,108 +21,114 @@ class PostController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
      */
-    public function index()
+    public function index(): View
     {
-        $posts = Post::query()->where("user_id", auth()->user()->id)->get();
+        $posts = Post::query()
+            ->where('user_id', auth()->user()->id)
+            ->get();
 
-        return view("posts.dashboard", compact("posts"));
+        return view("posts.dashboard", $posts);
     }
 
     /**
      * Show the form for creating a new resource.
      *
      */
-    public function create()
+    public function create(): View
     {
-        return view("posts.add-post", [
-            "categories" => DB::table("categories")->get()
+        return view('posts.add-post', [
+            'categories' => Category::all()
         ]);
     }
 
     /*
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param PostStoreRequest $request
+     * @return RedirectResponse
      */
-    public function store(PostStoreRequest $request)
+    public function store(PostStoreRequest $request): RedirectResponse
     {
-        $request->image->store("posts", "public");
+        $request->image->store('posts', 'public');
 
         Post::query()->create([
-            "title" => $request->title,
-            "description" => $request->description,
-            "image" => $request->image->hashName(),
-            "category_id" => $request->categories,
-            "user_id" => auth()->user()->id
+            'title'       => $request->title,
+            'description' => $request->description,
+            'image'       => $request->image->hashName(),
+            'category_id' => $request->categories,
+            'user_id'     => auth()->user()->id
         ]);
 
-        return redirect()->route("posts.index");
+        return redirect()->route('posts.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Post $post
-     *
+     * @param Post $post
+     * @return View
      */
-    public function show(Post $post)
+    public function show(Post $post): View
     {
-        return view("posts.post-page", compact("post"));
+        return view('posts.post-page', $post);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\Post $post
-     *
+     * @param Post $post
+     * @return View
      */
-    public function edit(Post $post)
+    public function edit(Post $post): View
     {
-        return view("posts.edit-post", [
-            "categories" => DB::table("categories")->get(),
-            "post" => $post
+        return view('posts.edit-post', [
+            'categories' => Category::all(),
+            'post'       => $post
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Post $post
-     *
+     * @param PostUpdateRequest $request
+     * @param Post $post
+     * @return mixed
      */
     public function update(PostUpdateRequest $request, Post $post)
     {
         if ($request->hasFile("image")) {
-            $upload = $request->image->store("posts", "public");
-            $path = basename($upload);
             File::delete(public_path('storage/posts/' . $post->image));
+
             $post->update([
-                "title" => $request->title,
-                "description" => $request->description,
-                "image" => $path,
-                "category_id" => $request->categories
+                'title'       => $request->title,
+                'description' => $request->description,
+                'image'       => basename($request->image->store("posts", "public")),
+                'category_id' => $request->categories
             ]);
-        } else {
-            $post->update($request->all());
+
+            return redirect()->route("posts.index");
         }
+
+        $post->update($request->all());
+
         return redirect()->route("posts.index");
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Post $post
-     *
+     * @param Post $post
+     * @return RedirectResponse
      */
-    public function destroy(Post $post)
+    public function destroy(Post $post): RedirectResponse
     {
         if (File::exists(public_path('storage/posts/' . $post->image))) {
             File::delete(public_path('storage/posts/' . $post->image));
         }
+
         $post->delete();
+
         return redirect()->route("posts.index");
     }
 }
