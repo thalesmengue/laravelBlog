@@ -4,14 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostStoreRequest;
 use App\Http\Requests\PostUpdateRequest;
+
+use App\Models\Category;
 use App\Models\Post;
-use Illuminate\Http\Request;
+
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\View\View;
 
 class PostController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware("auth")->except("show");
@@ -20,31 +24,37 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
-        $posts = Post::query()->where("user_id", auth()->user()->id)->get();
+        $posts = Post::query()
+            ->where("user_id", auth()->user()->id)
+            ->latest("created_at")
+            ->get();
 
-        return view("posts.dashboard", compact("posts"));
+        return view("posts.dashboard", ["posts" => $posts]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         return view("posts.add-post", [
-            "categories" => DB::table("categories")->get()
+            "categories" => Category::all()
         ]);
     }
 
-    /*
+    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param PostStoreRequest $request
+     * @return RedirectResponse
      */
-    public function store(PostStoreRequest $request)
+    public function store(PostStoreRequest $request): RedirectResponse
     {
         $request->image->store("posts", "public");
 
@@ -62,24 +72,25 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Post $post
-     *
+     * @param Post $post
+     * @return View
      */
-    public function show(Post $post)
+    public function show(Post $post): View
     {
-        return view("posts.post-page", compact("post"));
+        return view("posts.post-page", ["post" => $post]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\Post $post
-     *
+     * @param Post $post
+     * @return View
      */
-    public function edit(Post $post)
+    public function edit(Post $post): View
     {
+        abort_unless(Gate::allows("edit", $post), 403);
         return view("posts.edit-post", [
-            "categories" => DB::table("categories")->get(),
+            "categories" => Category::all(),
             "post" => $post
         ]);
     }
@@ -87,11 +98,11 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Post $post
-     *
+     * @param PostUpdateRequest $request
+     * @param Post $post
+     * @return mixed
      */
-    public function update(PostUpdateRequest $request, Post $post)
+    public function update(PostUpdateRequest $request, Post $post): RedirectResponse
     {
         if ($request->hasFile("image")) {
             $upload = $request->image->store("posts", "public");
@@ -110,13 +121,14 @@ class PostController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete a specified record.
      *
-     * @param \App\Models\Post $post
-     *
+     * @param Post $post
+     * @return RedirectResponse
      */
-    public function destroy(Post $post)
+    public function destroy(Post $post): RedirectResponse
     {
+        abort_unless(Gate::allows("delete", $post), 403);
         if (File::exists(public_path('storage/posts/' . $post->image))) {
             File::delete(public_path('storage/posts/' . $post->image));
         }

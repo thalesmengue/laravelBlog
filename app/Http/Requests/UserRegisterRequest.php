@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rules\Password;
 
 class UserRegisterRequest extends FormRequest
 {
@@ -12,7 +12,7 @@ class UserRegisterRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -22,18 +22,18 @@ class UserRegisterRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             "first_name" => ["required", "string", "max:60", "min:3"],
             "last_name" => ["required", "string", "max:80", "min:3"],
             "username" => ["required", "string", "max:24", "min:3", "unique:users"],
             "email" => ["required", "string", "email", "max:80", "unique:users"],
-            "password" => ["required", "confirmed", Rules\Password::defaults()],
+            "password" => ["required", "confirmed", Password::defaults()],
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             "first_name.required" => "The first name field must be filled",

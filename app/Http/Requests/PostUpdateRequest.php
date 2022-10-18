@@ -11,7 +11,7 @@ class PostUpdateRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,26 +21,26 @@ class PostUpdateRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            "title" => "required|string|min:5|max:60",
-            "description" => "required|string|min:10|max:6000",
-            "image" => "image|mimes:jpeg,jpg,png,gif",
-            "categories" => "required"
+            "title" => ["required", "string", "min:5", "max:60"],
+            "description" => ["required", "string", "min:10", "max:6000"],
+            "image" => ["image", "mimes:jpeg,jpg,png,gif"],
+            "categories" => ["required"]
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             "title.required" => "The title field must be filled",
-            "title.string" => "The title field must be a valid message",
+            "title.string" => "The title field must contain a valid message",
             "title.min" => "The title field must have at least 5 characters",
             "title.max" => "The title field must have less than 60 characters",
 
             "description.required" => "The description field must be filled",
-            "description.string" => "The description field must be a valid message",
+            "description.string" => "The description field must contain a valid message",
             "description.min" => "The description field must have at least 10 characters",
             "description.max" => "The description field must have less than 6000 characters",
 

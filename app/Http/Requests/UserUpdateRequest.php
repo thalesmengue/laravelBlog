@@ -2,10 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class UserUpdateRequest extends FormRequest
 {
@@ -24,19 +21,19 @@ class UserUpdateRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            "first_name" => "required|min:3|max:60",
-            "last_name" => "required|min:3|max:60",
-            "email" => "required|email|min:5|max:80|unique:users,email," . auth()->id(),
-            "username" => "required|min:5|max:20|unique:users,username," . auth()->id(),
-            "bio" => "max:140",
-            "profile_image" => "image|mimes:jpeg,png,jpg,gif"
+            "first_name" => ["required", "min:3", "max:60"],
+            "last_name" => ["required", "min:3", "max:60"],
+            "email" => ["required", "email", "min:5", "max:80", "unique:users,email," . auth()->id()],
+            "username" => ["required", "min:5", "max:20", "unique:users,username," . auth()->id()],
+            "bio" => ["max:140"],
+            "profile_image" => ["image", "mimes:jpeg,png,jpg,gif"]
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             "first_name.required" => "The field first name must be filled",
