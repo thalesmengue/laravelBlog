@@ -10,8 +10,7 @@ use App\Http\Controllers\UserController;
 Route::get("/", HomePageController::class)->name("index");
 
 Route::resource("posts", PostController::class);
-Route::resource("user", UserController::class)
-    ->middleware("can:edit,user");
+Route::resource("user", UserController::class);
 
 
 require __DIR__ . '/auth.php';

@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserUpdateRequest;
+
 use App\Models\Post;
 use App\Models\User;
+
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Gate;
+
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -33,11 +35,13 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @param User $user
      * @return View
+     * @throws AuthorizationException
      */
     public function edit(User $user): View
     {
-        abort_unless(Gate::allows("edit", $user), 403);
+        $this->authorize("edit", $user);
         return view("user.settings", ["user" => $user]);
     }
 

@@ -8,10 +8,9 @@ use App\Http\Requests\PostUpdateRequest;
 use App\Models\Category;
 use App\Models\Post;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
 class PostController extends Controller
@@ -74,9 +73,11 @@ class PostController extends Controller
      *
      * @param Post $post
      * @return View
+     * @throws AuthorizationException
      */
     public function show(Post $post): View
     {
+        $this->authorize("edit", $post);
         return view("posts.post-page", ["post" => $post]);
     }
 
@@ -85,10 +86,11 @@ class PostController extends Controller
      *
      * @param Post $post
      * @return View
+     * @throws AuthorizationException
      */
     public function edit(Post $post): View
     {
-        abort_unless(Gate::allows("edit", $post), 403);
+        $this->authorize("edit", $post);
         return view("posts.edit-post", [
             "categories" => Category::all(),
             "post" => $post
@@ -125,10 +127,11 @@ class PostController extends Controller
      *
      * @param Post $post
      * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function destroy(Post $post): RedirectResponse
     {
-        abort_unless(Gate::allows("delete", $post), 403);
+        $this->authorize("delete", $post);
         if (File::exists(public_path('storage/posts/' . $post->image))) {
             File::delete(public_path('storage/posts/' . $post->image));
         }

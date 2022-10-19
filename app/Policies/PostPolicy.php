@@ -11,10 +11,10 @@ class PostPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can access the edit form.
+     * Determine whether the user can update the model.
      *
-     * @param User $user
-     * @param Post $post
+     * @param  User  $user
+     * @param  Post  $post
      * @return bool
      */
     public function edit(User $user, Post $post): bool
@@ -25,8 +25,8 @@ class PostPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param User $user
-     * @param Post $post
+     * @param  User  $user
+     * @param  Post  $post
      * @return bool
      */
     public function delete(User $user, Post $post): bool
