@@ -17,7 +17,7 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware("auth")->except("show");
+        $this->authorizeResource(Post::class, "post");
     }
 
     /**
@@ -77,7 +77,6 @@ class PostController extends Controller
      */
     public function show(Post $post): View
     {
-        $this->authorize("edit", $post);
         return view("posts.post-page", ["post" => $post]);
     }
 
@@ -90,7 +89,6 @@ class PostController extends Controller
      */
     public function edit(Post $post): View
     {
-        $this->authorize("edit", $post);
         return view("posts.edit-post", [
             "categories" => Category::all(),
             "post" => $post

@@ -16,6 +16,11 @@ use Illuminate\View\View;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(User::class, "user");
+    }
+
     /**
      * Display the user profile, with the username as a URL parameter.
      *
@@ -41,7 +46,6 @@ class UserController extends Controller
      */
     public function edit(User $user): View
     {
-        $this->authorize("edit", $user);
         return view("user.settings", ["user" => $user]);
     }
 

@@ -17,7 +17,7 @@ class UserPolicy
      * @param User $model
      * @return bool
      */
-    public function edit(User $user, User $model): bool
+    public function update(User $user, User $model): bool
     {
         return $user->is($model);
     }
