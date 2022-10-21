@@ -23,12 +23,23 @@ class PostPolicy
     }
 
     /**
-     * Determine whether the user can a specific any model.
+     * Determine whether the user can view a specific any model.
      *
      * @param ?User $user
      * @return bool
      */
     public function view(?User $user): bool
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can create a record.
+     *
+     * @param User $user
+     * @return bool
+     */
+    public function create(User $user): bool
     {
         return true;
     }
