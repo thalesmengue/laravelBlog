@@ -1,6 +1,6 @@
 <div class="max-w-screen-xl mx-auto">
     <div class="inset-0">
-        @if($post->user_id === auth()->user()->id)
+        @if($post->user_id === Auth::id())
             <div class="h-2/3 sm:h-2/3 mr-8 mt-4 flex flex-row float-right">
                 <div>
                     <button onclick="window.location='{{ route("posts.edit", $post) }}'" type="button"
