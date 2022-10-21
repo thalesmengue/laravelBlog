@@ -21,7 +21,7 @@ class UserPolicy
      * @param ?User $user
      * @return bool
      */
-    public function view($username): bool
+    public function view(?User $user): bool
     {
         return true;
     }
