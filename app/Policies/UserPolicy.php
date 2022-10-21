@@ -10,6 +10,22 @@ class UserPolicy
 {
     use HandlesAuthorization;
 
+    public function viewAny(?User $user): bool
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can update the model.
+     *
+     * @param ?User $user
+     * @return bool
+     */
+    public function view($username): bool
+    {
+        return true;
+    }
+
     /**
      * Determine whether the user can update the model.
      *

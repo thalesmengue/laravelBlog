@@ -12,6 +12,7 @@ use Illuminate\Http\RedirectResponse;
 
 use Illuminate\Support\Facades\File;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -24,10 +25,10 @@ class UserController extends Controller
     /**
      * Display the user profile, with the username as a URL parameter.
      *
-     * @param $username
+     * @param User $username
      * @return View
      */
-    public function show($username): View
+    public function show(User $username): View
     {
         $user = User::query()->where('username', $username)->firstOrFail();
         $posts = Post::query()->where('user_id', $user->id)->latest("created_at")->get();
@@ -42,7 +43,6 @@ class UserController extends Controller
      *
      * @param User $user
      * @return View
-     * @throws AuthorizationException
      */
     public function edit(User $user): View
     {

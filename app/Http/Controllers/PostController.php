@@ -73,7 +73,6 @@ class PostController extends Controller
      *
      * @param Post $post
      * @return View
-     * @throws AuthorizationException
      */
     public function show(Post $post): View
     {
@@ -125,11 +124,9 @@ class PostController extends Controller
      *
      * @param Post $post
      * @return RedirectResponse
-     * @throws AuthorizationException
      */
     public function destroy(Post $post): RedirectResponse
     {
-        $this->authorize("delete", $post);
         if (File::exists(public_path('storage/posts/' . $post->image))) {
             File::delete(public_path('storage/posts/' . $post->image));
         }
