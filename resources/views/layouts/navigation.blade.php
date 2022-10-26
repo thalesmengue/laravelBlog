@@ -17,7 +17,7 @@
                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                             >Profile</a>
                         @endauth
-                        <a href="#"
+                        <a href="{{ route("about") }}"
                            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About
                         </a>
                     </div>
@@ -60,7 +60,7 @@
                              x-transition:leave-end="transform opacity-0 scale-95"
                              class="absolute right-0 w-full mt-1 origin-top-right rounded-md shadow-lg md:w-48">
                             <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
-                                <button onclick="window.location='{{route("user.edit", auth()->user()->id)}}'" class="block px-4 py-2 mt-2 text-sm
+                                <button onclick="window.location='{{route("user.edit", Auth::user())}}'" class="block px-4 py-2 mt-2 text-sm
                                  font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-900 focus:text-gray-900
                                   hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"> Settings
                                 </button>

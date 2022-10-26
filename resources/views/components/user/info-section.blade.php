@@ -17,12 +17,6 @@
                                 </span>
                                 <span class="text-sm text-blueGray-400">Posts</span>
                             </div>
-                            <div class="mr-4 p-3 text-center">
-                            <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600 ml-20">
-                                10
-                            </span>
-                                <span class="text-sm text-blueGray-400 ml-20">Followers</span>
-                            </div>
                             <div class="lg:mr-4 p-3 text-center">
                             </div>
                         </div>

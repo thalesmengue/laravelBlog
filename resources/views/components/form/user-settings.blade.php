@@ -1,4 +1,18 @@
 <div class="bg-white">
+    <div class="w-3/4 content-center ml-56">
+    <form action="{{ route("user.destroy", Auth::user()) }}" method="post">
+        @csrf
+        @method("DELETE")
+        <div class="w-3/4 px-12">
+            <button type="submit"
+                    class="float-right rounded-md border border-gray-300 bg-red-500 py-2 px-4 text-sm font-medium text-white
+                             shadow-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                Delete
+            </button>
+            <p class="font-mono">Want to delete your account? Click in the red button</p>
+        </div>
+    </form>
+    </div>
     <div class="w-3/4 content-center ml-56 p-12">
         <form enctype="multipart/form-data" action="{{route("user.update", $user)}}"
               class="space-y-8 divide-y divide-gray-200" method="post">
@@ -143,19 +157,18 @@
                             </div>
 
                             <div class="pt-5">
-                                <div class="flex justify-end">
-                                    <button type="button" onclick="window.location='{{ url()->previous() }}'"
-                                            class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700
+                            </div>
+                            <div class="flex justify-end gap-5">
+                                <button type="button" onclick="window.location='{{ url()->previous() }}'"
+                                        class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700
                              shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                                        Cancel
-                                    </button>
-                                    <button type="submit"
-                                            class="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600
-                            py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none
-                            focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                                        Save
-                                    </button>
-                                </div>
+                                    Cancel
+                                </button>
+                                <button type="submit"
+                                        class="rounded-md border border-gray-300 bg-indigo-600 py-2 px-4 text-sm font-medium text-white
+                             shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                    Save
+                                </button>
                             </div>
                         </div>
                     </div>

@@ -7,19 +7,21 @@ use App\Http\Requests\UserUpdateRequest;
 use App\Models\Post;
 use App\Models\User;
 
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
 
 class UserController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(User::class, "user");
+        $this->authorizeResource(User::class, null, [
+            "except" => "show"
+        ]);
     }
 
     /**
@@ -28,10 +30,9 @@ class UserController extends Controller
      * @param User $username
      * @return View
      */
-    public function show(User $username): View
+    public function show(User $user): View
     {
-        $user = User::query()->where('username', $username)->firstOrFail();
-        $posts = Post::query()->where('user_id', $user->id)->latest("created_at")->get();
+        $posts = $user->posts()->latest()->get();
         return view('user.profile', [
             "user" => $user,
             "posts" => $posts
@@ -81,10 +82,14 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param User $user
-     * @return
+     * @return RedirectResponse
      */
-    public function destroy(User $user)
+    public function destroy(User $user): RedirectResponse
     {
-        //
+        $user->delete();
+
+        Auth::logout();
+
+        return redirect()->to("/");
     }
 }
