@@ -27,7 +27,7 @@ class UserController extends Controller
     /**
      * Display the user profile, with the username as a URL parameter.
      *
-     * @param User $username
+     * @param User $user
      * @return View
      */
     public function show(User $user): View
