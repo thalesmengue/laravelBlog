@@ -39,7 +39,7 @@ $ php artisan key:generate
 $ php artisan migrate
 
 # seed the database with the categories
-$ php artisan db:seed --Class=CategorySeeder
+$ php artisan db:seed --class=CategorySeeder
 
 # run the application
 $ php artisan serve
