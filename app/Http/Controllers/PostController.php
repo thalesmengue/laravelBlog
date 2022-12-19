@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostStoreRequest;
 use App\Http\Requests\PostUpdateRequest;
-
 use App\Models\Category;
 use App\Models\Post;
-
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\File;
@@ -116,6 +114,7 @@ class PostController extends Controller
         } else {
             $post->update($request->all());
         }
+
         return redirect()->route("posts.index");
     }
 
@@ -130,7 +129,9 @@ class PostController extends Controller
         if (File::exists(public_path('storage/posts/' . $post->image))) {
             File::delete(public_path('storage/posts/' . $post->image));
         }
+
         $post->delete();
+
         return redirect()->route("posts.index");
     }
 }

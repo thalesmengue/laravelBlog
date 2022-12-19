@@ -30,7 +30,7 @@ class RegisteredUserController extends Controller
      * @param  UserRegisterRequest  $request
      * @return RedirectResponse
      */
-    public function store(UserRegisterRequest $request): RedirectResponse
+    public function store(UserRegisterRequest $request)
     {
         $user = User::query()->create([
             "first_name" => $request->first_name,

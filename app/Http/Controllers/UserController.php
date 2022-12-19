@@ -2,17 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\DeletedUser;
 use App\Http\Requests\UserUpdateRequest;
-
-use App\Models\Post;
 use App\Models\User;
-
 use Illuminate\Http\RedirectResponse;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
-
-use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -86,6 +81,8 @@ class UserController extends Controller
      */
     public function destroy(User $user): RedirectResponse
     {
+        event(new DeletedUser($user));
+
         $user->delete();
 
         Auth::logout();
