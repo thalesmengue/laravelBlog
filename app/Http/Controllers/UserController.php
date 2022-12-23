@@ -19,12 +19,6 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Display the user profile, with the username as a URL parameter.
-     *
-     * @param User $user
-     * @return View
-     */
     public function show(User $user): View
     {
         $posts = $user->posts()->latest()->get();
@@ -34,51 +28,33 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param User $user
-     * @return View
-     */
     public function edit(User $user): View
     {
         return view("user.settings", ["user" => $user]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param UserUpdateRequest $request
-     * @param User $user
-     * @return mixed
-     */
     public function update(UserUpdateRequest $request, User $user): RedirectResponse
     {
-        if ($request->hasFile("profile_image")) {
-            $request->profile_image->store("profile", "public");
-            if (!empty($user->profile_image)) {
-                File::delete(public_path('storage/profile/' . $user->profile_image));
-            }
-            $user->update([
-                "first_name" => $request->first_name,
-                "last_name" => $request->last_name,
-                "email" => $request->email,
-                "username" => $request->username,
-                "bio" => $request->bio,
-                "profile_image" => $request->profile_image->hashName(),
-            ]);
-        } else {
-            $user->update($request->all());
+        $path = null;
+
+        if ($request->hasFile('profile_image')) {
+            $upload = $request->profile_image->store("profile", "public");
+            $path = basename($upload);
+            File::delete(public_path('storage/profile/' . $user->profile_image));
         }
-        return redirect()->route("posts.index");
+
+        $user->update([
+            "first_name" => $request->first_name,
+            "last_name" => $request->last_name,
+            "email" => $request->email,
+            "username" => $request->username,
+            "bio" => $request->bio,
+            "profile_image" => $path,
+        ]);
+
+        return redirect()->route("index");
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param User $user
-     * @return RedirectResponse
-     */
     public function destroy(User $user): RedirectResponse
     {
         event(new DeletedUser($user));

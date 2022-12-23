@@ -9,11 +9,6 @@ use Illuminate\View\View;
 
 class HomePageController extends Controller
 {
-    /**
-     * Display the home page.
-     *
-     * @return View
-     */
     public function __invoke(): View
     {
         $posts = Post::query()
