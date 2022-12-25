@@ -42,8 +42,9 @@
                         <button @click="open = !open"
                                 class="flex flex-wrap w-full px-12 py-2 mt-2 text-sm font-mono space-x-3 items-center bg-gray-800
                         rounded-lg hover:text-gray-900 focus:text-gray-900 hover:opacity-70 focus:outline-none focus:shadow-outline">
-                            <img src="{{asset("storage/profile/".auth()->user()->getImage())}}" class="w-8 rounded-full">
-                            <span class="text-white"> {{auth()->user()->first_name}} </span>
+                            <img src="{{ asset("storage/" . auth()->user()->getImage()) }}"
+                                 class="w-8 rounded-full">
+                            <span class="text-white"> {{ auth()->user()->first_name }} </span>
                             <svg fill="currentColor" viewBox="0 0 20 20"
                                  :class="{'rotate-180': open, 'rotate-0': !open}"
                                  class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1 fill-white">

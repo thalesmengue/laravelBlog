@@ -3,7 +3,7 @@
         <div class="flex flex-col overflow-hidden rounded-lg shadow-lg">
             <div class="flex-shrink-0">
                 <img class="h-48 w-full object-cover"
-                     src="{{asset("storage/posts/$post->image")}}"
+                     src="{{asset("storage/$post->image")}}"
                      alt="">
             </div>
             <div class="flex flex-1 flex-col justify-between bg-white p-6">
@@ -27,7 +27,7 @@
                     <div class="flex-shrink-0">
                         <a href="#">
                             <img class="h-10 w-10 rounded-full"
-                                 src="{{asset("storage/profile/".$post->user->getImage())}}" alt="">
+                                 src="{{asset("storage/" . $post->user->getImage())}}" alt="">
                         </a>
                     </div>
                     <div class="ml-3">
