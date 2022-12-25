@@ -18,7 +18,9 @@ class DeleteStoredImagesListener
     public function handle(DeletedUser $event)
     {
         foreach ($event->user->posts as $post) {
-                File::delete(public_path('storage/posts/' . $post->image));
+                File::delete(public_path('storage/' . $post->image));
         }
+
+        File::delete(public_path('storage/' . $event->user->profile_image));
     }
 }

@@ -17,7 +17,6 @@ class DeletedUser
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public User $user;
-    public Post $post;
 
     /**
      * Create a new event instance.
@@ -27,6 +26,5 @@ class DeletedUser
     public function __construct($user)
     {
         $this->user = $user;
-//        $this->post = $post;
     }
 }
