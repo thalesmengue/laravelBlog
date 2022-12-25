@@ -22,6 +22,7 @@ class UserController extends Controller
     public function show(User $user): View
     {
         $posts = $user->posts()->latest()->get();
+
         return view('user.profile', [
             "user" => $user,
             "posts" => $posts
@@ -35,11 +36,9 @@ class UserController extends Controller
 
     public function update(UserUpdateRequest $request, User $user): RedirectResponse
     {
-        $path = null;
-
         if ($request->hasFile('profile_image')) {
-            $upload = $request->profile_image->store("profile", "public");
-            $path = basename($upload);
+            $request->profile_image = $request->profile_image->store("profile", "public");
+
             File::delete(public_path('storage/profile/' . $user->profile_image));
         }
 
@@ -49,7 +48,7 @@ class UserController extends Controller
             "email" => $request->email,
             "username" => $request->username,
             "bio" => $request->bio,
-            "profile_image" => $path,
+            "profile_image" => $request->profile_image,
         ]);
 
         return redirect()->route("index");

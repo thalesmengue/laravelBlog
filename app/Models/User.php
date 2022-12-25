@@ -65,7 +65,7 @@ class User extends Authenticatable
     public function getImage(): mixed
     {
         if (empty($this->profile_image)) {
-            return "default.png";
+            return "/profile/default.png";
         } else {
             return $this->profile_image;
         }
