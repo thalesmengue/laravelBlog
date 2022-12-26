@@ -22,7 +22,7 @@ class PostController extends Controller
         $posts = Post::query()
             ->where('user_id', auth()->user()->id)
             ->latest('created_at')
-            ->get();
+            ->paginate(6);
 
         return view('posts.dashboard', ['posts' => $posts]);
     }

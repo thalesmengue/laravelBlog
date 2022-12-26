@@ -27,9 +27,13 @@
                 <x-post.post-card :posts="$posts"/>
             </div>
             @if($posts->isEmpty())
-                <p class="text-center font-bold text-xl">you haven't posted anything yet, you can create posts by clicking
+                <p class="text-center font-bold text-xl">you haven't posted anything yet, you can create posts by
+                    clicking
                     on the purple button in the upper left corner</p>
             @endif
+            <div class="flex justify-center mt-8">
+                {{ $posts->links('vendor.pagination.tailwind') }}
+            </div>
         </div>
     </div>
 </x-app-layout>

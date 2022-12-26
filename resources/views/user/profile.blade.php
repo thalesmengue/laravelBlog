@@ -10,6 +10,9 @@
             <div class="flex flex-col">
                 <h2 class="font-semibold mt-4">Posts</h2>
                     <x-post.profile-post-card :posts="$posts" :user="$user"/>
+                <div class="flex justify-center mt-8 mb-4">
+                    {{ $posts->links('vendor.pagination.tailwind') }}
+                </div>
             </div>
         </div>
     </div>
