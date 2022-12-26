@@ -41,6 +41,12 @@ $ php artisan migrate
 # seed the database with the categories
 $ php artisan db:seed --class=CategorySeeder
 
+# install the node packages
+$ npm install
+
+# build the assets
+$ npm run dev
+
 # run the application
 $ php artisan serve
 ```
