@@ -41,6 +41,9 @@ $ php artisan migrate
 # seed the database with the categories
 $ php artisan db:seed --class=CategorySeeder
 
+# set the symbolic link between the storage and the public folder
+$ php artisan storage:link
+
 # install the node packages
 $ npm install
 
