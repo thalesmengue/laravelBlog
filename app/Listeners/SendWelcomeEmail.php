@@ -10,15 +10,9 @@ use Illuminate\Support\Facades\Mail;
 
 class SendWelcomeEmail implements ShouldQueue
 {
-    /**
-     * Handle the event.
-     *
-     * @param  Registered $event
-     * @return void
-     */
     public function handle(Registered $event): void
     {
         Mail::to($event->user->email)
-            ->send(new WelcomeEmail($event->user));
+            ->queue(new WelcomeEmail($event->user));
     }
 }
