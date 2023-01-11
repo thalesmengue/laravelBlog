@@ -54,6 +54,11 @@ $ npm run dev
 $ php artisan serve
 ```
 
+The welcome e-mail to a new user is set to be sent on a queue, so you need to configure the
+mail variables on the```.env``` file to not have any problems with the e-mail sending. Besides this, you need 
+to configure the "queue_connection" that on laravel by default is sync, so you can set the connection that you prefer, 
+I personally use Redis.
+
 ## Technologies
 - [PHP 8.0.2](https://www.php.net/docs.php)
 - [Laravel 9.19](https://laravel.com/docs/9.x)
