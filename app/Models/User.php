@@ -62,12 +62,12 @@ class User extends Authenticatable
         return $this->posts()->count();
     }
 
-    public function getImage(): mixed
+    public function getImage(): string
     {
         if (empty($this->profile_image)) {
-            return "/profile/default.png";
+            return asset('assets/pikachu.png');
         } else {
-            return $this->profile_image;
+            return asset('storage/' . $this->profile_image);
         }
     }
 }

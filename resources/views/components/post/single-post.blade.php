@@ -36,7 +36,7 @@
                             {{ $post->title }}
                         </h2>
                         <div class="flex mt-3">
-                            <img src="{{ asset("storage/" . $post->user->getImage()) }}"
+                            <img src="{{ $post->user->getImage() }}"
                                  class="h-10 w-10 rounded-full mr-2 object-cover"/>
                             <div>
                                 <p class="font-semibold text-gray-200 text-sm">{{ $post->user->first_name . " " . $post->user->last_name }}</p>

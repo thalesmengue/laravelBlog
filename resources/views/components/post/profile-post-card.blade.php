@@ -32,7 +32,7 @@
                     <div class="flex-shrink-0">
                         <a href="#">
                             <img class="h-10 w-10 rounded-full"
-                                 src="{{ asset("storage/" . $post->user->getImage()) }}" alt="">
+                                 src="{{ $post->user->getImage() }}" alt="">
                         </a>
                     </div>
                     <div class="ml-3">

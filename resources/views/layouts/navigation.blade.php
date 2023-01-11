@@ -42,7 +42,7 @@
                         <button @click="open = !open"
                                 class="flex flex-wrap w-full px-12 py-2 mt-2 text-sm font-mono space-x-3 items-center bg-gray-800
                         rounded-lg hover:text-gray-900 focus:text-gray-900 hover:opacity-70 focus:outline-none focus:shadow-outline">
-                            <img src="{{ asset("storage/" . auth()->user()->getImage()) }}"
+                            <img src="{{ auth()->user()->getImage() }}"
                                  class="w-8 rounded-full">
                             <span class="text-white"> {{ auth()->user()->first_name }} </span>
                             <svg fill="currentColor" viewBox="0 0 20 20"
